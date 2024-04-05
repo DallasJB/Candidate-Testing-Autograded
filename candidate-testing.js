@@ -5,13 +5,13 @@ const input = require('readline-sync');
 // TODO 1.1a: Define candidateName // 
 let candidateName = '';
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
-let question = "Who was the first American woman in space?\n";
+let question = "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
 let candidateAnswer = '';
 
 
 //TODO: Variables for Part 2
-let questions = ["Who was the first American woman in space?\n", "True or false: 5 kilometer == 5000 meters?\n", "(5 + 3)/2 * 10 = ?\n", "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2?\n", "What is the minimum crew size for the ISS?\n"];
+let questions = ["Who was the first American woman in space? ","True or false: 5 kilometer == 5000 meters? ","(5 + 3)/2 * 10 = ? ","Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ","What is the minimum crew size for the ISS? "];
 let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"];
 let candidateAnswers = [];
 
@@ -33,22 +33,31 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-  console.log(`Candidate Name: ${candidateName}`);
-    for (let i = 0; i <= 4; i++) {
-      console.log(`${i + 1}) ${questions[i]} Your Answer: ${candidateAnswers[i]}
-      Correct answer: ${correctAnswers[i]}
-      `);
+  console.log(`Candidate Name:${candidateName}`);
+    // for (let i = 0; i <= 4; i++) {
+    //   console.log(`${i + 1} ${questions[i]} Your Answer: ${candidateAnswers[i]}
+    //   Correct answer: ${correctAnswers[i]}`);
+    // }
+    let numberOfCorrectAnswers = 0
+    for (let i = 0; i < questions.length; i++) {
+      console.log(`${i + 1} ${questions[i]} Your Answer: ${candidateAnswers[i]}
+      Correct answer: ${correctAnswers[i]}`)
+      if(candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+        numberOfCorrectAnswers++;
+      }
     }
-    
 
-  
+let grade = (numberOfCorrectAnswers / questions.length) * 100; 
+console.log(`Overall Grade: ${grade}% (${numberOfCorrectAnswers} of ${questions.length} correct)`)
 
-
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
-
-  return grade;
+if (grade >= 80) {
+  console.log("Status: PASSED");
+} else {
+  console.log("Status: Failed");
 }
+return grade;
+}
+
 
 function runProgram() {
   candidateName = askForName();
